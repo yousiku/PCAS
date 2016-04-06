@@ -16,7 +16,9 @@ def add(request):
 
 def search(request):
     sea = request.GET['search']
+    '''
     keywords = Keywords.objects.all()
     for key in keywords:
         print key.skuid
-    return HttpResponse(sea)
+        '''
+    return HttpResponse(sea+'aaa')
