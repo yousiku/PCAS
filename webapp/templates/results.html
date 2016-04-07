@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
+    <title>jieguo</title>
 </head>
 <body>
-
 <form method="get" action="/search/">
     <input type="text" id="search" name="search"> <br>
     <input type="submit" value="搜索">
@@ -18,16 +17,9 @@
     </span>
     <button type="button" id='sum'>提交</button></p>-->
 </form>
-<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-<!--<script>
-    $(document).ready(function(){
-      $("#sum").click(function(){
-        var search = $("#search").val();
-        $.get("/search/",{'search':search}, function(ret){
-            $('#result').html(ret)
-        })
-      });
-    });
-</script>-->
+
+{% for item in keywords %}
+    <a href="{{ item.url }}" target="_blank">{{ item.keywords }}</a><br>
+{% endfor %}
 </body>
 </html>

@@ -1,7 +1,9 @@
 #-*- coding:utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from models import Keywords
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 def index(request):
@@ -16,9 +18,6 @@ def add(request):
 
 def search(request):
     sea = request.GET['search']
-    '''
-    keywords = Keywords.objects.all()
-    for key in keywords:
-        print key.skuid
-        '''
-    return HttpResponse(sea+'aaa')
+    keywords = Keywords.objects.filter(keywords__icontains=sea)
+    return render(request,'results.html',{'keywords':keywords})
+
