@@ -7,3 +7,4 @@ class Keywords(models.Model):
     skuid = models.CharField(max_length=50)
     url = models.CharField(max_length=100)
     keywords = models.CharField(max_length=200)
+    price = models.FloatField()
