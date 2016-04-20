@@ -18,10 +18,12 @@
     <button type="button" id='sum'>提交</button></p>-->
 </form>
 <table>
-{% for item in keywords %}
+
+{% for item in res %}
     <tr><td><a href="{{ item.url }}" target="_blank">{{ item.keywords }}</a></td>
         <td>{{ item.price }}</td></tr>
 {% endfor %}
+
     </table>
 </body>
 </html>

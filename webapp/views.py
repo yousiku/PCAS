@@ -2,8 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from models import Keywords
-from django.http import JsonResponse
-import json
+import jieba
 
 # Create your views here.
 def index(request):
@@ -18,6 +17,11 @@ def add(request):
 
 def search(request):
     sea = request.GET['search']
-    keywords = Keywords.objects.filter(keywords__icontains=sea)
-    return render(request,'results.html',{'keywords':keywords})
+    s = jieba.cut(sea,cut_all=False)
+    results = []
+    for ss in s:
+        keywords = Keywords.objects.filter(keywords__icontains=ss)
+        results.append(keywords)
+    res = list(set(results[0]).intersection(*results[1:]))
+    return render(request,'results.html',{'res':res})
 
