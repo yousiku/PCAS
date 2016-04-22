@@ -19,9 +19,9 @@
 </form>
 <table>
 
-{% for key,value in products.items %}
-    <tr><td><a href="{{ key.url }}" target="_blank">{{ key.keywords }}</a></td>
-        <td>{{ key.price }}</td><td>{{ value }}</td></tr>
+{% for pro in pros %}
+    <tr><td><a href="{{ pro.0.url }}" target="_blank">{{ pro.0.keywords }}</a></td>
+        <td>{{ pro.0.price }}</td><td>{{ pro.1 }}</td></tr>
     {% empty %}
     <P>没有符合条件的商品</P>
 {% endfor %}

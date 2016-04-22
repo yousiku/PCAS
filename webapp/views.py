@@ -26,7 +26,9 @@ def search(request):
     products = {}
     for pro in res:
         products[pro] = pipeidu(pro.keywords,s)
-    return render(request,'results.html',{'products':products})
+    pros = sorted(products.iteritems(),key=lambda products:products[1],reverse=True)
+    print pros
+    return render(request,'results.html',{'pros':pros})
 
 def pipeidu(str_keywords,list_fenci):
     cnt = 0
