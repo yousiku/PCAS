@@ -5,27 +5,22 @@
     <title>jieguo</title>
 </head>
 <body>
+<h1 align="center">商品比较分析系统</h1><br><br>
 <form method="get" action="/search/">
-    <input type="text" id="search" name="search"> <br>
-    <input type="submit" value="搜索">
-   <!-- <p>
-        result:<span id='result'>
-        {{ keywords }}
-        {% for item in keywords %}
-        {{ item.keywords }},
-        {% endfor %}
-    </span>
-    <button type="button" id='sum'>提交</button></p>-->
+    <div align="center"><input type="text" id="search" name="search" style="height:30px;width:350px">
+        <input type="submit" value="搜索" style="height:37px;width:80px"></div>
 </form>
-<table>
 
+<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ len_list }}个结果</h4>
+<hr width="70%">
+<table width="70%" align="center">
+    <tr><th>商品名称</th><th>价格</th></tr>
 {% for pro in pros %}
-    <tr><td><a href="{{ pro.0.url }}" target="_blank">{{ pro.0.keywords }}</a></td>
-        <td>{{ pro.0.price }}</td><td>{{ pro.1 }}</td></tr>
+    <tr align="left"><td><a href="{{ pro.0.url }}" target="_blank">{{ pro.0.keywords }}</a></td>
+        <td>{{ pro.0.price }}</td></tr>
     {% empty %}
-    <P>没有符合条件的商品</P>
+    <tr><td>没有符合条件的商品</td></tr>
 {% endfor %}
-
     </table>
 </body>
 </html>

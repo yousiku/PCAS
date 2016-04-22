@@ -16,8 +16,10 @@ def add(request):
     return HttpResponse(str(c))
 
 def search(request):
-    sea = request.GET['search'].replace(' ','')
+    sea = request.GET['search']
     s = jieba.lcut(sea,cut_all=False)
+    while ' ' in s:
+        s.remove(' ')
     results = []
     for ss in s:
         keywords = Keywords.objects.filter(keywords__icontains=ss)
@@ -27,8 +29,8 @@ def search(request):
     for pro in res:
         products[pro] = pipeidu(pro.keywords,s)
     pros = sorted(products.iteritems(),key=lambda products:products[1],reverse=True)
-    print pros
-    return render(request,'results.html',{'pros':pros})
+    len_list = len(pros)
+    return render(request,'results.html',{'pros':pros,'len_list':len_list})
 
 def pipeidu(str_keywords,list_fenci):
     cnt = 0
