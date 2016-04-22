@@ -16,12 +16,21 @@ def add(request):
     return HttpResponse(str(c))
 
 def search(request):
-    sea = request.GET['search']
-    s = jieba.cut(sea,cut_all=False)
+    sea = request.GET['search'].replace(' ','')
+    s = jieba.lcut(sea,cut_all=False)
     results = []
     for ss in s:
         keywords = Keywords.objects.filter(keywords__icontains=ss)
         results.append(keywords)
-    res = list(set(results[0]).intersection(*results[1:]))
-    return render(request,'results.html',{'res':res})
+    res = list(set(results[0]).union(*results[1:]))
+    products = {}
+    for pro in res:
+        products[pro] = pipeidu(pro.keywords,s)
+    return render(request,'results.html',{'products':products})
 
+def pipeidu(str_keywords,list_fenci):
+    cnt = 0
+    for fenci in list_fenci:
+        if fenci in str_keywords:
+            cnt += 1
+    return cnt
